@@ -6,10 +6,10 @@ const testimonialRouter = require('./testimonial/router')
 const languageRouter = require('./language/router')
 const projectRouter = require('./project/router')
 const userRouter = require('./user/router')
-const port = 3000
+const port = process.env.PORT || 3000
 const cors = require('cors')
 const mwBasicAuth = require('./middleware/basicAuth')
-require('./mongoose')
+require('./db/mongoose')
 const URL = '/api/v2'
 const myLogger = function (req, res, next) {
   console.log('LOGGED')
