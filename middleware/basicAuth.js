@@ -7,10 +7,7 @@ const mwBasicAuth = async (req, res, next) => {
     if (basicAuthUser) {
       const users = await User.findOne({ username: basicAuthUser.name })
       if (users) {
-        if (
-          basicAuthUser &&
-          basicAuthUser.name.toLowerCase() === users.username.toLowerCase()
-        ) {
+        if (basicAuthUser && basicAuthUser.name === users.username) {
           const checkPassword = bcrypt.compareSync(
             basicAuthUser.pass,
             users.password
