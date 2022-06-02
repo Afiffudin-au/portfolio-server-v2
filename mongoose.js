@@ -1,8 +1,9 @@
 const dotenv = require('dotenv')
 dotenv.config()
 const mongoose = require('mongoose')
+const { urlDb } = require('./config')
 mongoose.connect(
-  process.env.MONGO_URL,
+  urlDb,
   () => {
     console.log('connected')
   },

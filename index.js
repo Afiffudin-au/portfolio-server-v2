@@ -19,8 +19,11 @@ app.use(myLogger)
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(URL, homeRouter)
 
+// BASE_URL
+app.use(homeRouter)
+// BASE_URL/api/v2
+app.use(URL, homeRouter)
 //For Production
 app.use(URL, mwBasicAuth, userRouter)
 
