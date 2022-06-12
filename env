@@ -1,0 +1,3 @@
+MODE=dev or production
+SERVICE_NAME=
+MONGO_URL=
