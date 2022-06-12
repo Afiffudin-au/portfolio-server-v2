@@ -25,14 +25,15 @@ app.use(express.json())
 app.use(homeRouter)
 // BASE_URL/api/v2
 app.use(URL, homeRouter)
+//Check basicAuth
+app.use(URL, checkBasicAuthRouter)
+
 //For Production
 app.use(URL, mwBasicAuth, userRouter)
-
 //For dev or Generate New Basic auth username and password
 // app.use(URL, userRouter)
 
 //routers
-app.use(URL, checkBasicAuthRouter)
 app.use(URL, mwBasicAuth, topicRouter)
 app.use(URL, mwBasicAuth, testimonialRouter)
 app.use(URL, mwBasicAuth, languageRouter)
