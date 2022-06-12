@@ -37,12 +37,12 @@ router.put('/languages/:id', async (req, res) => {
         runValidators: true,
       }
     )
-    if (languages) {
-      res.status(200).json({
-        data: languages,
-      })
+    if (languages.modifiedCount === 0) {
+      res.status(400).json({ message: 'language cant be updated' })
     } else {
-      res.status(400).json({ message: 'languages tidak ditemukan' })
+      res.status(200).json({
+        message: 'language has been updated',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
@@ -52,12 +52,12 @@ router.delete('/languages/:id', async (req, res) => {
   try {
     const { id } = req.params
     const languages = await Language.deleteOne({ _id: id })
-    if (languages) {
-      res.status(200).json({
-        data: languages,
-      })
+    if (languages.deletedCount === 0) {
+      res.status(400).json({ message: 'language cant be deleted' })
     } else {
-      res.status(400).json({ message: 'languages tidak ditemukan' })
+      res.status(200).json({
+        message: 'language has been deleted',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })

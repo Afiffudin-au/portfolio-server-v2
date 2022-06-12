@@ -46,12 +46,12 @@ router.put('/projects/:id', async (req, res) => {
         runValidators: true,
       }
     )
-    if (projects) {
-      res.status(200).json({
-        data: projects,
-      })
+    if (projects.modifiedCount === 0) {
+      res.status(400).json({ message: 'project cant be updated ' })
     } else {
-      res.status(400).json({ message: 'projects tidak ditemukan' })
+      res.status(200).json({
+        message: 'project has been updated',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
@@ -61,12 +61,12 @@ router.delete('/projects/:id', async (req, res) => {
   try {
     const { id } = req.params
     const projects = await Project.deleteOne({ _id: id })
-    if (projects) {
-      res.status(200).json({
-        data: projects,
-      })
+    if (projects.deletedCount === 0) {
+      res.status(400).json({ message: 'project cant be deleted ' })
     } else {
-      res.status(400).json({ message: 'projects tidak ditemukan' })
+      res.status(200).json({
+        message: 'project has been deleted',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })

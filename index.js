@@ -6,6 +6,7 @@ const testimonialRouter = require('./testimonial/router')
 const languageRouter = require('./language/router')
 const projectRouter = require('./project/router')
 const userRouter = require('./user/router')
+const checkBasicAuthRouter = require('./checkBasicAuth/router')
 const port = process.env.PORT || 3000
 const cors = require('cors')
 const mwBasicAuth = require('./middleware/basicAuth')
@@ -31,6 +32,7 @@ app.use(URL, mwBasicAuth, userRouter)
 // app.use(URL, userRouter)
 
 //routers
+app.use(URL, checkBasicAuthRouter)
 app.use(URL, mwBasicAuth, topicRouter)
 app.use(URL, mwBasicAuth, testimonialRouter)
 app.use(URL, mwBasicAuth, languageRouter)

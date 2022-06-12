@@ -41,12 +41,12 @@ router.put('/testimonials/:id', async (req, res) => {
         runValidators: true,
       }
     )
-    if (testimonials) {
-      res.status(200).json({
-        data: testimonials,
-      })
+    if (testimonials.modifiedCount === 0) {
+      res.status(400).json({ message: 'testimonial cant be updated' })
     } else {
-      res.status(400).json({ message: 'testimonials tidak ditemukan' })
+      res.status(200).json({
+        message: 'testimonial has been updated',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
@@ -56,12 +56,12 @@ router.delete('/testimonials/:id', async (req, res) => {
   try {
     const { id } = req.params
     const testimonials = await Testimonial.deleteOne({ _id: id })
-    if (testimonials) {
-      res.status(200).json({
-        data: testimonials,
-      })
+    if (testimonials.deletedCount === 0) {
+      res.status(400).json({ message: 'testimonial cant be deleted' })
     } else {
-      res.status(400).json({ message: 'testimonials tidak ditemukan' })
+      res.status(200).json({
+        message: 'testimonial has been deleted',
+      })
     }
   } catch (err) {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
