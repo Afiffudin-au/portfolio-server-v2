@@ -11,6 +11,19 @@ router.get('/projects', async (req, res) => {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
   }
 })
+router.get('/projects/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const projects = await Project.findOne({ _id: id })
+    if (projects) {
+      res.status(200).send({ data: projects })
+    } else {
+      res.status(400).send({ message: 'Project not found' })
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Internal server erorr' })
+  }
+})
 router.post('/projects', async (req, res, next) => {
   try {
     const { projectName, description, githubLink, imgUrl, tech, previewLink } =
