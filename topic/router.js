@@ -11,6 +11,19 @@ router.get('/topics', async (req, res) => {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
   }
 })
+router.get('/topics/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const topics = await Topic.findOne({ _id: id })
+    if (topics) {
+      res.status(200).send({ data: topics })
+    } else {
+      res.status(400).send({ message: 'Topic not found' })
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Internal server erorr' })
+  }
+})
 router.post('/topics', async (req, res) => {
   try {
     const { urlTopic } = req.body

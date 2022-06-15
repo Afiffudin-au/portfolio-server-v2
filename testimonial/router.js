@@ -11,6 +11,19 @@ router.get('/testimonials', async (req, res) => {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
   }
 })
+router.get('/testimonials/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const testimonials = await Testimonial.findOne({ _id: id })
+    if (testimonials) {
+      res.status(200).send({ data: testimonials })
+    } else {
+      res.status(400).send({ message: 'Testimonial not found' })
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Internal server erorr' })
+  }
+})
 router.post('/testimonials', async (req, res, next) => {
   try {
     const { name, description, imgUrl } = req.body

@@ -11,6 +11,19 @@ router.get('/languages', async (req, res) => {
     res.status(500).json({ message: err.message || 'Internal server erorr' })
   }
 })
+router.get('/languages/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const languages = await Language.findOne({ _id: id })
+    if (languages) {
+      res.status(200).send({ data: languages })
+    } else {
+      res.status(400).send({ message: 'Language not found' })
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message || 'Internal server erorr' })
+  }
+})
 router.post('/languages', async (req, res) => {
   try {
     const { urlProgLang } = req.body
