@@ -1,5 +1,7 @@
 # portfolio-server-v2
 
+A portfolio server is a simple and flexible way to collect, store, and display your work. Designed to make your data accessible and  simply a place to document your work.
+
 this is the v2 service API used by https://github.com/Afiffudin-au/new-portfolio.
 
  - API v1 = https://github.com/Afiffudin-au/portfolio-server-v1
