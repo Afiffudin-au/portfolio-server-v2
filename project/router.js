@@ -37,7 +37,7 @@ router.post('/projects', async (req, res, next) => {
         tech,
         previewLink,
       })
-      res.status(200).json({
+      res.status(201).json({
         data: projects,
       })
     } else {

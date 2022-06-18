@@ -30,7 +30,7 @@ router.post('/topics', async (req, res) => {
     const topics = await Topic.create({
       urlTopic,
     })
-    res.status(200).json({
+    res.status(201).json({
       data: topics,
     })
   } catch (err) {

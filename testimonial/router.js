@@ -32,7 +32,7 @@ router.post('/testimonials', async (req, res, next) => {
       description,
       imgUrl,
     })
-    res.status(200).json({
+    res.status(201).json({
       data: testimonials,
     })
   } catch (err) {

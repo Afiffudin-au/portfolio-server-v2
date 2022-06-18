@@ -30,7 +30,7 @@ router.post('/languages', async (req, res) => {
     const languages = await Language.create({
       urlProgLang,
     })
-    res.status(200).json({
+    res.status(201).json({
       data: languages,
     })
   } catch (err) {
