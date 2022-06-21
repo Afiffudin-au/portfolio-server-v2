@@ -45,7 +45,7 @@ router.put('/topics/:id', async (req, res) => {
     const topics = await Topic.updateOne(
       { _id: id },
       {
-        urlTopic: parseTopicUrl(urlTopic),
+        urlTopic,
       },
       {
         runValidators: true,

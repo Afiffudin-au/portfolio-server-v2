@@ -45,7 +45,7 @@ router.put('/languages/:id', async (req, res) => {
     const languages = await Language.updateOne(
       { _id: id },
       {
-        urlProgLang: parseLanguageUrl(urlProgLang),
+        urlProgLang,
       },
       {
         runValidators: true,
