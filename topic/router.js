@@ -1,6 +1,7 @@
 const express = require('express')
 const Topic = require('./model')
 const router = express.Router()
+const { parseTopicUrl } = require('../lib/urlParser')
 router.get('/topics', async (req, res) => {
   try {
     const topics = await Topic.find()
@@ -28,7 +29,7 @@ router.post('/topics', async (req, res) => {
   try {
     const { urlTopic } = req.body
     const topics = await Topic.create({
-      urlTopic,
+      urlTopic: parseTopicUrl(urlTopic),
     })
     res.status(201).json({
       data: topics,
@@ -44,7 +45,7 @@ router.put('/topics/:id', async (req, res) => {
     const topics = await Topic.updateOne(
       { _id: id },
       {
-        urlTopic,
+        urlTopic: parseTopicUrl(urlTopic),
       },
       {
         runValidators: true,

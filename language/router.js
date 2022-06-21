@@ -1,6 +1,7 @@
 const express = require('express')
 const Language = require('./model')
 const router = express.Router()
+const { parseLanguageUrl } = require('../lib/urlParser')
 router.get('/languages', async (req, res) => {
   try {
     const languages = await Language.find()
@@ -28,7 +29,7 @@ router.post('/languages', async (req, res) => {
   try {
     const { urlProgLang } = req.body
     const languages = await Language.create({
-      urlProgLang,
+      urlProgLang: parseLanguageUrl(urlProgLang),
     })
     res.status(201).json({
       data: languages,
@@ -44,7 +45,7 @@ router.put('/languages/:id', async (req, res) => {
     const languages = await Language.updateOne(
       { _id: id },
       {
-        urlProgLang,
+        urlProgLang: parseLanguageUrl(urlProgLang),
       },
       {
         runValidators: true,
